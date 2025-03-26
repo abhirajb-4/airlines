@@ -1,0 +1,8 @@
+com\example\arilines\model\Airlines.class
+com\example\arilines\repository\AirlinesRepository.class
+com\example\arilines\dto\FlightRequest.class
+com\example\arilines\ArilinesApplication.class
+com\example\arilines\service\AirlinesService.class
+com\example\arilines\FlightDataLoader.class
+com\example\arilines\controller\AirlinesController.class
+com\example\arilines\dto\FlightResponse.class
