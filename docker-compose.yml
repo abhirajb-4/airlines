@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    image: abhiraj4444/fights-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/flightdb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: pass@word1
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./src/main/resources/flights.csv:/app/resources/flights.csv
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: flightdb
+      MYSQL_ROOT_PASSWORD: pass@word1
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+
+volumes:
+    mysql-data:
